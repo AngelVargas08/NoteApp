@@ -7,13 +7,14 @@ import 'package:notes_app/ui/widgets/button.dart';
 import 'package:provider/provider.dart';
 
 class ShowDialog extends StatelessWidget {
-  const ShowDialog({super.key});
+  final int? index;
+  const ShowDialog(this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     final note = context.watch<NotesProvider>();
-    late bool? note2 = context.read<NotesProvider>().vali;
+    late bool note2 = context.read<NotesProvider>().vali;
+    final bool edit = context.read<NotesProvider>().edit;
     return  AlertDialog(
       backgroundColor: ThemeGeneral.colorprimary,
       content:  SizedBox(
@@ -23,7 +24,7 @@ class ShowDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
               TextFormField(
-              initialValue: note.textfield2,
+              initialValue: (edit)?note.textfield:null,
               onChanged: (value) => note.valitadion(value),
               decoration: InputDecoration(
                 labelText: 'Ingrese la nueva Nota',
@@ -37,14 +38,22 @@ class ShowDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ButtonGeneral(
-                  title: 'Guardar'
+                  title:'Guardar'
                   ,onPressed: (){
-                  note.saveNewTask(context);
+                     if(edit == false){
+                      note.saveNewTask(context);
+                     }else{
+                      note.editTask(context,index!);
+                     }
                   }
+                 
+                  
                   ),
+                  
+                 
                 const SizedBox(width: 10,),
                 ButtonGeneral(title: 'Cancelar',onPressed: () => 
-                Navigator.of(context).pop(),), 
+                note.cancelar(context)), 
                 
               ],
             )

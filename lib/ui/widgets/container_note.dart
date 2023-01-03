@@ -6,6 +6,7 @@ import 'package:notes_app/ui/utils/themes_color.dart';
 
 class ContainerData extends StatelessWidget {
   final String title;
+  final int index;
   final bool value;
   final Function(bool?)? check;
   final Function(BuildContext) onPressed;
@@ -14,7 +15,9 @@ class ContainerData extends StatelessWidget {
       required this.title,
       required this.check,
       required this.value, 
-      required this.onPressed});
+      required this.onPressed, 
+      required this.index, 
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class ContainerData extends StatelessWidget {
           motion: const StretchMotion(), 
           children: [
           SlidableAction(
-            onPressed: (context) => utils.newEvent(context),
+            onPressed: (context) => utils.editEvent(context, index),
             icon: Icons.edit,
             backgroundColor: Colors.green,
             borderRadius: BorderRadius.circular(15),

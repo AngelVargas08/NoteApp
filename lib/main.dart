@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() async{
   
     await Hive.initFlutter();
-    var box = await Hive.openBox('Mybox');
+   await Hive.openBox('Mybox');
   
    runApp(
   ChangeNotifierProvider(
