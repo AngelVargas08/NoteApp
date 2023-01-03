@@ -27,7 +27,7 @@ class ShowDialog extends StatelessWidget {
               initialValue: (edit)?note.textfield:null,
               onChanged: (value) => note.valitadion(value),
               decoration: InputDecoration(
-                labelText: 'Ingrese la nueva Nota',
+                labelText: (edit)?'Actualize la nota':'Ingrese la nueva nota',
                 errorText: note2? null :'Ingrese una nueva nota',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)

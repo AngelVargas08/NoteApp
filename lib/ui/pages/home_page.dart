@@ -4,6 +4,7 @@ import 'package:notes_app/models/notes_provider.dart';
 import 'package:notes_app/models/utils.dart';
 import 'package:notes_app/ui/utils/themes_color.dart';
 import 'package:notes_app/ui/widgets/container_note.dart';
+import 'package:notes_app/ui/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
     Utils utils = Utils();
     return  Scaffold(
       backgroundColor: ThemeGeneral.colorprimary,
-      endDrawer: const Drawer(),
+      endDrawer: const MyDrawer(),
       appBar: AppBar(
         title: const Text('Note'),
         elevation: 0
