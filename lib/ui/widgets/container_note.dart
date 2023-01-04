@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:notes_app/models/notes_provider.dart';
 import 'package:notes_app/models/utils.dart';
 
 import 'package:notes_app/ui/utils/themes_color.dart';
+import 'package:provider/provider.dart';
 
 class ContainerData extends StatelessWidget {
   final String title;
@@ -21,6 +23,7 @@ class ContainerData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
       Utils utils = Utils();
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
@@ -46,7 +49,7 @@ class ContainerData extends StatelessWidget {
           width: 500,
           height: 100,
           decoration: BoxDecoration(
-              color: ThemeGeneral.colorTerc,
+              color: (darkmode)?ThemeGeneral.colorDark2:ThemeGeneral.colorTerc,
               borderRadius: BorderRadius.circular(15)),
           child: _ContentContainer(
             title: title,
@@ -72,9 +75,11 @@ class _ContentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
     return Row(
       children: [
-        Checkbox(value: value, onChanged: check),
+        Checkbox(value: value, onChanged: check, 
+        activeColor: (darkmode)?ThemeGeneral.colorTerc:ThemeGeneral.colorNeu),
         Text(
           title,
           style:  TextStyle(

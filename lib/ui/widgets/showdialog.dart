@@ -15,8 +15,9 @@ class ShowDialog extends StatelessWidget {
     final note = context.watch<NotesProvider>();
     late bool note2 = context.read<NotesProvider>().vali;
     final bool edit = context.read<NotesProvider>().edit;
+    final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
     return  AlertDialog(
-      backgroundColor: ThemeGeneral.colorprimary,
+      backgroundColor: (darkmode)?ThemeGeneral.colorDark2:ThemeGeneral.colorprimary,
       content:  SizedBox(
         width: 300,
         height: 160,

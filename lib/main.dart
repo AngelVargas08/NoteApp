@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = context.select<NotesProvider,ThemeData>((value)=>value.curretTheme);
     return  MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: themeData,
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
       home: const HomePage()

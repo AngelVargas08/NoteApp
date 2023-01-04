@@ -4,6 +4,7 @@ import 'package:notes_app/data/database.dart';
 
 class NotesProvider extends ChangeNotifier {
   late String textfield;
+  //relacion con la bd
   DataBaseNote db = DataBaseNote();
   final _mybox = Hive.box('Mybox');
   List get notedata => db.notedata;
@@ -29,7 +30,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
 
-//cargamos el dato seleccionado en el textfields
+//cargamos el dato seleccionado en el textfield
   void textfieldcharge(int index){
         textfield = notedata[index][0];
   }
@@ -98,4 +99,37 @@ class NotesProvider extends ChangeNotifier {
     Navigator.of(context).pop();
     notifyListeners();
   }
+
+    bool _darkmode = false;
+    get darkmode => _darkmode;
+     ThemeData _curretTheme = ThemeData(primarySwatch: Colors.deepPurple);
+    ThemeData get curretTheme => _curretTheme;
+
+    void changeDarkmode(bool i ){
+      _darkmode = i;
+      _customMode = false;
+      if(i){
+        _curretTheme = ThemeData.dark();
+      }else{
+        _curretTheme = ThemeData(primarySwatch: Colors.deepPurple);
+      }
+      notifyListeners();
+    }
+
+    bool _customMode = false;
+    get customMode => _customMode;
+
+    void changeCustom(bool i ){
+      _customMode = i;
+      _darkmode = false;
+      notifyListeners();
+    }
+
+
+
+
+
+
+
+
 }

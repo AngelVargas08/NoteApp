@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/models/notes_provider.dart';
 import 'package:notes_app/models/utils.dart';
@@ -13,18 +12,20 @@ class HomePage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
+    final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
     Utils utils = Utils();
     return  Scaffold(
-      backgroundColor: ThemeGeneral.colorprimary,
+      backgroundColor: (darkmode)?ThemeGeneral.colorDark1:ThemeGeneral.colorprimary,
       endDrawer: const MyDrawer(),
       appBar: AppBar(
+        backgroundColor: (darkmode)?ThemeGeneral.colorDark2:ThemeGeneral.colorSegundary,
         title: const Text('Note'),
         elevation: 0
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => utils.newEvent(context),
-          child: const Icon(Icons.add, size: 35,),
+          backgroundColor: (darkmode)?ThemeGeneral.colorTerc:ThemeGeneral.colorNeu,
+          child: const Icon(Icons.add, size: 35),
           ),
         body: _Listview()
           
