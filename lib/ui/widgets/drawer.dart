@@ -41,7 +41,7 @@ class MyDrawer extends StatelessWidget {
                 builder: (context, value, child) => Switch.adaptive(
                 activeColor: ThemeGeneral.colorSegundary,
                 value: value,
-                 onChanged: (value) => context.read<NotesProvider>().changeCustom(value),),
+                 onChanged: (value) => context.read<NotesProvider>().changeCustom(value, context),),
                  
                  ),
             ),

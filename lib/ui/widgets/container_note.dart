@@ -28,6 +28,7 @@ class ContainerData extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
       child: Slidable(
+        key: const ValueKey(0),
         endActionPane: ActionPane(
           motion: const StretchMotion(), 
           children: [

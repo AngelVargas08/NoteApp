@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_app/data/database.dart';
+import 'package:notes_app/models/utils.dart';
 
 class NotesProvider extends ChangeNotifier {
   late String textfield;
@@ -119,13 +120,24 @@ class NotesProvider extends ChangeNotifier {
     bool _customMode = false;
     get customMode => _customMode;
 
-    void changeCustom(bool i ){
+
+
+      Utils utils = Utils();
+    void changeCustom(bool i , BuildContext context){
+      if(i == true){
+        utils.customColor(context);
+      }
       _customMode = i;
       _darkmode = false;
       notifyListeners();
     }
 
-
+  int _number = 0;
+  int get number =>_number+1;
+  void numberr(int i){
+    _number = i;
+    notifyListeners();
+  }
 
 
 

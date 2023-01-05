@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:notes_app/models/notes_provider.dart';
+import 'package:notes_app/ui/widgets/showcustomcolor.dart';
 import 'package:notes_app/ui/widgets/showdialog.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,12 @@ void editEvent(BuildContext context, int index){
     context: context,
      builder: (context) => ShowDialog(index),    
      );
+}
+
+void customColor(BuildContext context){
+  showDialog(context: context, 
+  builder:(context) => const ShowCustomColor (),
+  );
 }
 
 

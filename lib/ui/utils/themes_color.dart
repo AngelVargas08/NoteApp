@@ -17,6 +17,10 @@ class ThemeGeneral{
   static TextStyle fontStyle = const TextStyle(
     color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold,
     );
+    static TextStyle fontStyleBlack = const TextStyle(
+    color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,
+    );
+    
     
   
 
