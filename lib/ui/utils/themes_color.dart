@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ThemeGeneral{
 
   static  Color? colorprimary = Colors.deepPurple[200];
-  static  Color? colorSegundary = Colors.deepPurple; 
+  static  MaterialColor colorSegundary = Colors.deepPurple; 
   static  Color? colorTerc = Colors.deepPurple[400];
   static  Color? colorNeu =  Colors.black;
   static  Color? colorDark1 = const Color(0xff000000);

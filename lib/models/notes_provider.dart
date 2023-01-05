@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_app/data/database.dart';
 import 'package:notes_app/models/utils.dart';
+import 'package:notes_app/ui/utils/themes_color.dart';
 
 class NotesProvider extends ChangeNotifier {
   late String textfield;
@@ -30,10 +31,9 @@ class NotesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
 //cargamos el dato seleccionado en el textfield
-  void textfieldcharge(int index){
-        textfield = notedata[index][0];
+  void textfieldcharge(int index) {
+    textfield = notedata[index][0];
   }
 
 //estado del checkbox
@@ -81,7 +81,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
 //editamos las notas
-  void editTask(BuildContext context,int index) {
+  void editTask(BuildContext context, int index) {
     if (notedata[index] == notedata[index]) {
       notedata[index][0] = textfield;
     }
@@ -92,6 +92,7 @@ class NotesProvider extends ChangeNotifier {
     db.updateData();
     notifyListeners();
   }
+
 //cierra el boton y reinicia la banderas
   void cancelar(BuildContext context) {
     _vali = false;
@@ -101,47 +102,71 @@ class NotesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-    bool _darkmode = false;
-    get darkmode => _darkmode;
-     ThemeData _curretTheme = ThemeData(primarySwatch: Colors.deepPurple);
-    ThemeData get curretTheme => _curretTheme;
+//Themes dark mode
+  bool _darkmode = false;
+  get darkmode => _darkmode;
+  ThemeData _curretTheme =
+      ThemeData(primarySwatch: ThemeGeneral.colorSegundary);
+  ThemeData get curretTheme => _curretTheme;
 
-    void changeDarkmode(bool i ){
-      _darkmode = i;
-      _customMode = false;
-      if(i){
-        _curretTheme = ThemeData.dark();
-      }else{
-        _curretTheme = ThemeData(primarySwatch: Colors.deepPurple);
-      }
-      notifyListeners();
+  void changeDarkmode(bool i) {
+    _darkmode = i;
+    _customMode = false;
+    if (i) {
+      _curretTheme = ThemeData.dark();
+    } else {
+      _curretTheme = ThemeData(primarySwatch: ThemeGeneral.colorSegundary);
     }
-
-    bool _customMode = false;
-    get customMode => _customMode;
-
-
-
-      Utils utils = Utils();
-    void changeCustom(bool i , BuildContext context){
-      if(i == true){
-        utils.customColor(context);
-      }
-      _customMode = i;
-      _darkmode = false;
-      notifyListeners();
-    }
-
-  int _number = 0;
-  int get number =>_number+1;
-  void numberr(int i){
-    _number = i;
     notifyListeners();
   }
 
+//Themes Custom
+  bool _customMode = false;
+  get customMode => _customMode;
 
+  Utils utils = Utils();
+  void changeCustom(bool i, BuildContext context) {
+    if (i == true) {
+      utils.customColor(context);
+    } else {
+              ThemeGeneral.colorprimary = Colors.deepPurple[200];
+              ThemeGeneral.colorSegundary= Colors.deepPurple; 
+              ThemeGeneral.colorTerc = Colors.deepPurple[400];   
+              selectColor.clear(); 
+    }
+    _customMode = i;
+    _darkmode = false;
+    notifyListeners();
+  }
 
+  //Theme personalizado
+  final List _selectColor = [];
+  List get selectColor => _selectColor;
+  void themeper(Color? color) {
+    _selectColor.add(color);
+    notifyListeners();
+  }
 
+  //save theme personalizado
 
+  void savetheme(BuildContext context) {
+    if (_selectColor.length > 2) {
+      for (int i = 0; i < _selectColor.length; i++) {
+        ThemeGeneral.colorprimary = selectColor[0];
+        ThemeGeneral.colorSegundary = selectColor[1];
+        ThemeGeneral.colorTerc = selectColor[2];
+        notifyListeners();
+      }
+    }
+    Navigator.of(context).pop();
+    notifyListeners();
+  }
 
+//indicador de pageview
+  int _number = 0;
+  int get number => _number + 1;
+  void numberr(int i) {
+    _number = i;
+    notifyListeners();
+  }
 }

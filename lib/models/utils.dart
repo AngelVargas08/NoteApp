@@ -31,5 +31,11 @@ void customColor(BuildContext context){
 }
 
 
+void closewindow(BuildContext context){
+    context.read<NotesProvider>().changeCustom(false, context);
+     Navigator.of(context).pop();
+}
+
+
 
 }
