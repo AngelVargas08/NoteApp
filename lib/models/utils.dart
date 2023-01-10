@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/models/notes_provider.dart';
 import 'package:notes_app/ui/widgets/showcustomcolor.dart';
@@ -36,6 +34,14 @@ void closewindow(BuildContext context){
      Navigator.of(context).pop();
 }
 
-
+void snackbarshow(BuildContext context,int index){
+  context.read<NotesProvider>().deletetask(index);
+   SnackBar(
+    content: Text('Hola mundo'),
+    action: SnackBarAction(label: 'undo', onPressed: () {
+      
+    },),
+    );
+}
 
 }

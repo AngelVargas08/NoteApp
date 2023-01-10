@@ -49,8 +49,7 @@ class _Listview extends StatelessWidget {
                     value: note.notedata[index][1],
                     check: (value) => note.change(value, index),
                     onPressed: (p0) => note.deletetask(index),
-                    index: index,
-                    
+                    index: index,                   
                     ),
       );
   }

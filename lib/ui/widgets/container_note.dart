@@ -24,12 +24,13 @@ class ContainerData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
+    final delete = context.watch<NotesProvider>();
       Utils utils = Utils();
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
       child: Slidable(
-        key: const ValueKey(0),
-        endActionPane: ActionPane(
+        key: Key(index.toString()),
+        startActionPane: ActionPane(
           motion: const StretchMotion(), 
           children: [
           SlidableAction(
@@ -38,13 +39,22 @@ class ContainerData extends StatelessWidget {
             backgroundColor: Colors.green,
             borderRadius: BorderRadius.circular(15),
           ),
-          SlidableAction(
+        ]),
+        
+        endActionPane: ActionPane(
+          dismissible: DismissiblePane(
+          onDismissed: ()=> utils.snackbarshow(context, index)
+          ),
+          motion: const StretchMotion(),
+          children: [
+            SlidableAction(
             onPressed: onPressed,
             icon: Icons.delete,
             backgroundColor: Colors.redAccent,
             borderRadius: BorderRadius.circular(15),
           )
-        ]),
+          ]),
+        
         child: Container(
           padding: const EdgeInsets.all(25),
           width: 500,
