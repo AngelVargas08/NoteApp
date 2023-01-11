@@ -34,14 +34,22 @@ void closewindow(BuildContext context){
      Navigator.of(context).pop();
 }
 
-void snackbarshow(BuildContext context,int index){
+void snackbarshow(BuildContext context,int index, String title){
   context.read<NotesProvider>().deletetask(index);
-   SnackBar(
-    content: Text('Hola mundo'),
-    action: SnackBarAction(label: 'undo', onPressed: () {
-      
-    },),
+  const text = 'Se elimino la nota';
+  final snackBar = SnackBar(
+    content: Text("$text $title"),
+    action: SnackBarAction(
+      label: 'Aceptar', 
+      onPressed: () {
+        
+      },),
+    
     );
+  ScaffoldMessenger.of(context)
+  ..removeCurrentSnackBar()
+  ..showSnackBar(snackBar);
+
 }
 
 }
