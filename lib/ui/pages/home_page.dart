@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:notes_app/models/notes_provider.dart';
 import 'package:notes_app/models/utils.dart';
 import 'package:notes_app/ui/utils/themes_color.dart';
-import 'package:notes_app/ui/widgets/container_note.dart';
-import 'package:notes_app/ui/widgets/drawer.dart';
-import 'package:provider/provider.dart';
+import 'package:notes_app/ui/widgets/widgets.dart';
+
 
 class HomePage extends StatelessWidget {
    
@@ -27,12 +28,7 @@ class HomePage extends StatelessWidget {
           backgroundColor: (darkmode)?ThemeGeneral.colorTerc:ThemeGeneral.colorNeu,
           child: const Icon(Icons.add, size: 35),
           ),
-        body: _Listview()
-          
-
-          
-          
-        
+        body: _Listview() 
     );
   }
 }
@@ -49,7 +45,7 @@ class _Listview extends StatelessWidget {
                     value: note.notedata[index][1],
                     check: (value) => note.change(value, index),
                     onPressed: (p0) => note.deletetask(index),
-                    index: index,                   
+                    index: index, 
                     ),
       );
   }

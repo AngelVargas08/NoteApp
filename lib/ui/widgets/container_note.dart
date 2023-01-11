@@ -24,7 +24,6 @@ class ContainerData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool darkmode =context.select<NotesProvider,bool>((value) => value.darkmode);
-    final note = context.watch<NotesProvider>().notedata[index][0];
       Utils utils = Utils();
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
@@ -43,7 +42,7 @@ class ContainerData extends StatelessWidget {
         
         endActionPane: ActionPane(
           dismissible: DismissiblePane(
-          onDismissed: ()=> utils.snackbarshow(context, index, note)
+          onDismissed: ()=> utils.snackbarshow(context, index, title),
           ),
           motion: const StretchMotion(),
           children: [
@@ -58,14 +57,16 @@ class ContainerData extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(25),
           width: 500,
-          height: 100,
+          height: 200,
           decoration: BoxDecoration(
               color: (darkmode)?ThemeGeneral.colorDark2:ThemeGeneral.colorTerc,
               borderRadius: BorderRadius.circular(15)),
-          child: _ContentContainer(
-            title: title,
-            value: value,
-            check: check,
+          child: Expanded(
+            child: _ContentContainer(
+              title: title,
+              value: value,
+              check: check,
+            ),
           ),
         ),
       ),
@@ -91,11 +92,14 @@ class _ContentContainer extends StatelessWidget {
       children: [
         Checkbox(value: value, onChanged: check, 
         activeColor: (darkmode)?ThemeGeneral.colorTerc:ThemeGeneral.colorNeu),
-        Text(
-          title,
-          style:  TextStyle(
-            color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold,
-            decoration: (value)? TextDecoration.lineThrough:TextDecoration.none 
+        Container(
+          color: Colors.black,
+          child: Text(
+            title,        
+            style:  TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold,
+              decoration: (value)? TextDecoration.lineThrough:TextDecoration.none 
+            ),
           ),
         )
       ],
